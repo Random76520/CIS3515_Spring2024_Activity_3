@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 
-class TextSizeAdapter(_context: Context, _numbers: Array<String>) : BaseAdapter() {
+class TextSizeAdapter(_context: Context, _numbers: Array<Int>) : BaseAdapter() {
 
     private val context = _context
     private val numbers = _numbers
@@ -23,11 +23,19 @@ class TextSizeAdapter(_context: Context, _numbers: Array<String>) : BaseAdapter(
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val textview = TextView(context)
-        textview.text = numbers[position]
-        textview.textSize = 22f
-        textview.setPadding(5, 0, 0, 10)
-        return textview
+        val textView: TextView
+
+        if (convertView != null) {
+            textView = convertView as TextView
+        } else {
+            textView = TextView(context)
+            textView.textSize = 22f
+            textView.setPadding(5, 0, 0, 10)
+        }
+
+        textView.text = numbers[position].toString()
+
+        return textView
     }
 
 }
